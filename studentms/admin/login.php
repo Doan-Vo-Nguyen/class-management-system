@@ -35,7 +35,7 @@ if(isset($_POST['login']))
   $_SESSION['login']=$_POST['email'];
   echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
   } else{
-  echo "<script>alert('Invalid Details');</script>";
+  echo "<script>swal('Error!', 'Invalid Details', 'error');</script>";
   }
 }
 
@@ -120,6 +120,7 @@ if(isset($_POST['login']))
     <!-- inject:js -->
     <script src="../admin/js/off-canvas.js"></script>
     <script src="../admin/js/misc.js"></script>
+    <script src="../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <!-- endinject -->
 </body>
 

@@ -82,7 +82,6 @@ include('includes/dbconnection.php');
                 </div>
                 <div class="clearfix"> </div>
             </div>
-
         </div>
     </div>
     <!-- /About -->

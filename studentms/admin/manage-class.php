@@ -126,10 +126,7 @@ if (strlen($_SESSION['login']==0)) {
                                                         <div><a
                                                                 href="edit-class-detail.php?editid=<?php echo htmlentities ($row->class_id);?>"><i
                                                                     class="icon-eye"></i></a>
-                                                            || <a
-                                                                href="manage-class.php?delid=<?php echo ($row->class_id);?>"
-                                                                onclick="return confirm('Do you really want to Delete ?');">
-                                                                <i class="icon-trash"></i></a></div>
+                                                        </div>
                                                     </td>
                                                 </tr><?php $cnt=$cnt+1;}} ?>
                                             </tbody>

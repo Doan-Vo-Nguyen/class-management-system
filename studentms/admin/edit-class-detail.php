@@ -71,7 +71,7 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                                     <form class="forms-sample" method="post">
                                         <?php
                                         $eid=$_GET['editid'];
-                                        $sql="SELECT * FROM  class where class_id=$eid";
+                                        $sql="SELECT * FROM class where class_id=$eid";
                                         $query = $dbh -> prepare($sql);
                                         $query->execute();
                                         $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -87,7 +87,7 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                                                 class="form-control" required='true'>
                                         </div>
                                         <!-- <button type="submit" class="btn btn-primary mr-2" name="submit">Update</button> -->
-                                        <div class="form-group">
+                                        <div class="form-group" id="table-class">
                                             <table class="table table-bordered table-hover data-tables">
                                                 <thead>
                                                     <tr>
@@ -96,13 +96,15 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                                                         <th>Gender</th>
                                                         <th>Date of Birth</th>
                                                         <th>Address</th>
+                                                        <th>District</th>
+                                                        <th>Province</th>
                                                         <th>Phone Number</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    $sql2 = "SELECT * FROM student WHERE class_id=:eid";
+                                                    $sql2 = "SELECT * FROM student WHERE class_id=:eid ORDER BY name ASC";
                                                     $query2 = $dbh -> prepare($sql2);
                                                     $query2->bindParam(':eid',$eid,PDO::PARAM_STR);
                                                     $query2->execute();
@@ -118,6 +120,8 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                                                         <td><?php  echo htmlentities($row1->gender);?></td>
                                                         <td><?php  echo htmlentities($row1->date);?></td>
                                                         <td><?php  echo htmlentities($row1->address);?></td>
+                                                        <td><?php  echo htmlentities($row1->district);?></td>
+                                                        <td><?php  echo htmlentities($row1->province);?></td>
                                                         <td><?php  echo htmlentities($row1->phone_number);?></td>
                                                         <td><a
                                                                 href="edit-student.php?subid=<?php echo htmlentities ($row1->id);?>">Edit</a>

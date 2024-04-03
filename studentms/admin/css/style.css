@@ -13341,6 +13341,10 @@ dl {
   height: 20px;
   min-width: 20px; }
 
+#table-class {
+  overflow: auto;
+}
+
 .pagination .page-item .page-link {
   font-size: 12px;
   font-weight: 600; }

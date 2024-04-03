@@ -103,7 +103,6 @@ $query->execute();
                                                 $query = $dbh -> prepare($sql);
                                                 $query->execute();
                                                 $results=$query->fetchAll(PDO::FETCH_OBJ);
-
                                                 $cnt=1;
                                                 if($query->rowCount() > 0)
                                                 {
