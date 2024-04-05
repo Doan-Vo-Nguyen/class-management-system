@@ -73,9 +73,9 @@ if (strlen($_SESSION['login']==0)) {
                                             <thead>
                                                 <tr>
                                                     <th class="font-weight-bold">S.No</th>
-                                                    <th class="font-weight-bold">Class Name</th>
-                                                    <th class="font-weight-bold">Section</th>
-                                                    <th class="font-weight-bold">Action</th>
+                                                    <th class="font-weight-bold">Activity Name</th>
+                                                    <th class="font-weight-bold">Date</th>
+                                                    <th class="font-weight-bold">Location</th>
 
                                                 </tr>
                                             </thead>
@@ -89,29 +89,28 @@ if (strlen($_SESSION['login']==0)) {
                                             // Formula for pagination
                                                 $no_of_records_per_page =15;
                                                 $offset = ($pageno-1) * $no_of_records_per_page;
-                                                $ret = "SELECT * FROM class";
+                                                $ret = "SELECT * FROM activities";
                                                 $query1 = $dbh -> prepare($ret);
                                                 $query1->execute();
                                                 $results1=$query1->fetchAll(PDO::FETCH_OBJ);
                                                 $total_rows=$query1->rowCount();
                                                 $total_pages = ceil($total_rows / $no_of_records_per_page);
-                                                $sql="SELECT DISTINCT * FROM class JOIN admin ON class.class_id = admin.manage_class WHERE admin.manage_class =:macl LIMIT $offset, $no_of_records_per_page";
+                                                $sql="SELECT * FROM activities LIMIT $offset, $no_of_records_per_page";
                                                 $query = $dbh -> prepare($sql);
-                                                echo $_SESSION['ad_cl'];
-                                                $query->bindParam(':macl',$_SESSION['ad_cl'], PDO::PARAM_STR);
                                                 $query->execute();
                                                 $results=$query->fetchAll(PDO::FETCH_OBJ);
 
                                                 $cnt=1;
+                                                echo $_SESSION['ad_cl'];
                                                 if($query->rowCount() > 0)
                                                 {
                                                 foreach($results as $row)
                                                 {               ?>
                                                 <tr>
-
                                                     <td><?php echo htmlentities($cnt);?></td>
-                                                    <td><?php  echo htmlentities($row->class_name);?></td>
-                                                    <td><?php  echo htmlentities($row->class_batch);?></td>
+                                                    <td><?php  echo htmlentities($row->activity_name);?></td>
+                                                    <td><?php  echo htmlentities($row->activity_date);?></td>
+                                                    <td><?php  echo htmlentities($row->location);?></td>
                                                     <td>
                                                         <div><a
                                                                 href="manage-activities-details.php?editid=<?php echo htmlentities ($row->class_id);?>"><i

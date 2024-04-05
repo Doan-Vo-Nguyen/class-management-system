@@ -10,12 +10,10 @@
                     <?php
                     $aid= $_SESSION['ad_id'];
                     $sql="SELECT * FROM admin WHERE admin_id=:aid";
-                    
                     $query = $dbh -> prepare($sql);
                     $query->bindParam(':aid',$aid,PDO::PARAM_STR);
                     $query->execute();
                     $results=$query->fetchAll(PDO::FETCH_OBJ);
-                    
                     $cnt=1;
                     if($query->rowCount() > 0)
                     {
@@ -82,7 +80,9 @@
             </a>
             <div class="collapse" id="ui-basic3">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="manage-activities.php">Manage Activities</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="add-activities.php"> Add Activity </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="manage-activities.php">Manage Activities</a>
+                    </li>
                 </ul>
             </div>
         </li>

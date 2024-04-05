@@ -36,7 +36,7 @@ if (strlen($_SESSION['login']==0)) {
     $query->bindParam(':status',$status,PDO::PARAM_STR);
     $query->bindParam(':eid',$eid,PDO::PARAM_STR);
     $query->execute();
-      echo '<script>alert("Student has been updated")</script>';
+      echo '<script>swal("Student has been updated")</script>';
     }
 
   ?>

@@ -2,35 +2,40 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-if (strlen($_SESSION['sturecmsaid']==0)) {
-  header('location:logout.php');
-  } else{
-   if(isset($_POST['submit']))
-  {
- $cname=$_POST['cname'];
- $section=$_POST['section'];
-$sql="insert into class(ClassName,Section)values(:cname,:section)";
-$query=$dbh->prepare($sql);
-$query->bindParam(':cname',$cname,PDO::PARAM_STR);
-$query->bindParam(':section',$section,PDO::PARAM_STR);
- $query->execute();
-   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
-    echo '<script>alert("Class has been added.")</script>';
-echo "<script>window.location.href ='add-class.php'</script>";
-  }
-  else
+if (strlen($_SESSION['login']==0)) {
+    header('location:logout.php');
+} else{
+    if(isset($_POST['submit']))
     {
-         echo '<script>alert("Something Went Wrong. Please try again")</script>';
+        $acname=$_POST['acname'];
+        $description=$_POST['desciption'];
+        $date=$_POST['date'];
+        $location=$_POST['location'];
+        $sql="INSERT INTO activities(activity_name, description, activity_date, location, notes)values(:acname,:des, :acdate, :location, :notes)";
+        $query=$dbh->prepare($sql);
+        $query->bindParam(':ac',$acname,PDO::PARAM_STR);
+        $query->bindParam(':des', $description, PDO::PARAM_STR);
+        $query->bindParam(':acdate', $date, PDO::PARAM_STR);
+        $query->bindParam(':location', $location, PDO::PARAM_STR);
+        $query->bindParam(':notes', $notes, PDO::PARAM_STR);
+        $query->execute();
+        $LastInsertId=$dbh->lastInsertId();
+        if ($LastInsertId>0) {
+            echo '<script>swal("Success!", "ACtivity has been added.", "success")</script>';
+            echo "<script>window.location.href ='add-class.php'</script>";
+        }
+        else
+        {
+         echo '<script>swal("Error!", "Something Went Wrong. Please try again", "error")</script>';
+        }
     }
-}
   ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <title>Student Management System|| Add Class</title>
+    <title>Student Management System|| Add Activity</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
@@ -59,11 +64,11 @@ echo "<script>window.location.href ='add-class.php'</script>";
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
-                        <h3 class="page-title"> Add Class </h3>
+                        <h3 class="page-title"> Add Activity </h3>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> Add Class</li>
+                                <li class="breadcrumb-item active" aria-current="page"> Add Activity</li>
                             </ol>
                         </nav>
                     </div>
@@ -72,26 +77,29 @@ echo "<script>window.location.href ='add-class.php'</script>";
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="text-align: center;">Add Class</h4>
+                                    <h4 class="card-title" style="text-align: center;">Add Activity</h4>
 
                                     <form class="forms-sample" method="post">
 
                                         <div class="form-group">
-                                            <label for="exampleInputName1">Class Name</label>
-                                            <input type="text" name="cname" value="" class="form-control"
+                                            <label for="exampleInputName1">ACtivity Name</label>
+                                            <input type="text" name="acname" value="" class="form-control"
                                                 required='true'>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail3">Section</label>
-                                            <select name="section" class="form-control" required='true'>
-                                                <option value="">Choose Section</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
-                                                <option value="E">E</option>
-                                                <option value="F">F</option>
-                                            </select>
+                                            <label for="exampleInputEmail3">Description</label>
+                                            <textarea name="description" value="" class="form-control"
+                                                required='true'></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword4">Date</label>
+                                            <input type="date" class="form-control" name="date" value=""
+                                                required='true'>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword4">Location</label>
+                                            <input type="text" class="form-control" name="location" value=""
+                                                required='true'>
                                         </div>
                                         <button type="submit" class="btn btn-primary mr-2" name="submit">Add</button>
 
@@ -125,6 +133,7 @@ echo "<script>window.location.href ='add-class.php'</script>";
     <!-- Custom js for this page -->
     <script src="js/typeahead.js"></script>
     <script src="js/select2.js"></script>
+    <script src="../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <!-- End custom js for this page -->
 </body>
 

@@ -7,7 +7,7 @@ if(isset($_POST['login']))
 {
   $email = $_POST['email'];
   $password = $_POST['password'];
-  $sql ="SELECT admin_id FROM admin WHERE email=:email AND password=:password";
+  $sql ="SELECT admin_id,manage_class FROM admin WHERE email=:email AND password=:password";
   $query = $dbh->prepare($sql);
   $query-> bindParam(':email', $email, PDO::PARAM_STR);
   $query-> bindParam(':password', $password, PDO::PARAM_STR);
@@ -16,7 +16,8 @@ if(isset($_POST['login']))
   if($query->rowCount() > 0)
   {
     foreach ($results as $result) {
-    $_SESSION['ad_id']=$result->admin_id;
+        $_SESSION['ad_id']=$result->admin_id;
+        $_SESSION['ad_cl']=$result->manage_class;
   }
   if(!empty($_POST["remember"])) {
     //COOKIES for username

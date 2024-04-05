@@ -119,10 +119,10 @@ $query->execute();
                                                     <td><?php  echo htmlentities($row->adress);?></td>
                                                     <td>
                                                         <div><a
-                                                                href="edit-student-detail.php?editid=<?php echo htmlentities ($row->sid);?>"><i
+                                                                href="edit-student-detail.php?editid=<?php echo htmlentities ($row->student_id);?>"><i
                                                                     class="icon-eye"></i></a>
                                                             || <a
-                                                                href="manage-students.php?delid=<?php echo ($row->sid);?>"
+                                                                href="manage-students.php?delid=<?php echo ($row->student_id);?>"
                                                                 onclick="return confirm('Do you really want to Delete ?');">
                                                                 <i class="icon-trash"></i></a></div>
                                                     </td>

@@ -71,7 +71,7 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                                     <form class="forms-sample" method="post">
                                         <?php
                                         $eid=$_GET['editid'];
-                                        $sql="SELECT * FROM class where class_id=$eid";
+                                        $sql="SELECT * FROM class WHERE class_id=$eid";
                                         $query = $dbh -> prepare($sql);
                                         $query->execute();
                                         $results=$query->fetchAll(PDO::FETCH_OBJ);
